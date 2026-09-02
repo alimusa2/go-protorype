@@ -149,7 +149,7 @@ export const projectsData = [
     description: 'Engineered an internal RAG copilot processing 2M+ financial compliance documents with sub-second semantic search.',
     metric: '+340% Audit Velocity',
     tags: ['Python', 'LangChain', 'Pinecone', 'React', 'FastAPI'],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800'
+    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200'
   },
   {
     id: 'health-synth',
@@ -159,7 +159,7 @@ export const projectsData = [
     description: 'Autonomous patient voice assistant reducing clinical intake queue wait times by automated symptom classification.',
     metric: '74% Queue Reduction',
     tags: ['Whisper AI', 'Twilio', 'Python', 'Tailwind', 'AWS'],
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800'
+    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1200'
   },
   {
     id: 'nexus-ops',
@@ -169,7 +169,7 @@ export const projectsData = [
     description: 'Dynamic route optimization dashboard powered by real-time predictive machine learning models.',
     metric: '$1.8M Fuel Cost Savings',
     tags: ['Next.js', 'PyTorch', 'GraphQL', 'Docker'],
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800'
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1200'
   },
   {
     id: 'pulse-app',
@@ -179,7 +179,7 @@ export const projectsData = [
     description: 'Real-time content engagement dashboard with AI headline generation and audience retention forecasting.',
     metric: '4.9★ App Store Rating',
     tags: ['React Native', 'TypeScript', 'Node.js', 'OpenAI'],
-    image: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&q=80&w=800'
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200'
   }
 ];
 
@@ -226,7 +226,7 @@ export const blogsData = [
     date: 'Aug 28, 2026',
     readTime: '5 min read',
     excerpt: 'Explore how multi-agent architectures are cutting operational bottlenecks by 80% across modern tech enterprises.',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1200',
     content: 'Autonomous AI agents represent the biggest paradigm shift in enterprise software since cloud migration. By combining reasoning models with structured API tool calling, modern agents operate multi-step workflows with high precision...'
   },
   {
@@ -236,7 +236,7 @@ export const blogsData = [
     date: 'Aug 14, 2026',
     readTime: '7 min read',
     excerpt: 'Key strategies for hybrid semantic search, chunking strategies, and re-ranking algorithms that reduce hallucinations.',
-    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1200',
     content: 'Retrieval-Augmented Generation (RAG) is simple in prototype but complex at scale. When handling millions of internal company documents, standard vector search degrades quickly unless paired with hybrid keyword indexing and cross-encoder re-ranking...'
   },
   {
@@ -246,7 +246,7 @@ export const blogsData = [
     date: 'Jul 30, 2026',
     readTime: '4 min read',
     excerpt: 'A deep dive into three companies that achieved 10x ROI within 30 days of deploying targeted internal tools.',
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200',
     content: 'Investing in AI shouldn’t be speculative. In this report, we break down real financial data from three GoArrow client deployments showing direct cost reductions and accelerated customer delivery...'
   }
 ];

@@ -114,38 +114,46 @@ export default function OurWork({ onOpenQuoteModal }) {
 
         {/* Filter Controls & Search */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveFilter(cat)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
-                  activeFilter === cat
-                    ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-950/60 border border-emerald-400/40'
-                    : 'bg-[#141414] text-gray-400 hover:text-white hover:bg-[#1f1f1f] border border-white/10'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          {/* Segmented Glassmorphic Category Tabs */}
+          <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[#121212] border border-white/10 shadow-inner">
+            {categories.map((cat) => {
+              const isActive = activeFilter === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveFilter(cat)}
+                  className={`relative px-4 py-2 rounded-xl text-xs font-semibold transition-colors duration-200 z-10 ${
+                    isActive ? 'text-white font-bold' : 'text-gray-400 hover:text-gray-200'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeWorkFilter"
+                      className="absolute inset-0 bg-gradient-to-r from-[#1a7a4a] to-emerald-600 rounded-xl shadow-lg shadow-emerald-950/60 border border-emerald-400/40 -z-10"
+                      transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                    />
+                  )}
+                  <span>{cat}</span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Search Box */}
           <div className="relative w-full md:w-72">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-emerald-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search case studies..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-full bg-[#121212] border border-white/10 text-white text-xs placeholder-gray-500 focus:outline-none focus:border-emerald-500 transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-[#121212] border border-white/10 text-white text-xs placeholder-gray-500 focus:outline-none focus:border-emerald-500 transition-colors shadow-inner"
             />
           </div>
         </div>
 
-        {/* Grid of Premium Portfolio Case Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 items-stretch">
+        {/* Grid of Premium Portfolio Case Cards with 3D Reverse Hover Animations */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch perspective-1000">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
               <motion.div
@@ -155,11 +163,12 @@ export default function OurWork({ onOpenQuoteModal }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, delay: idx * 0.08 }}
-                whileHover={{ y: -6 }}
-                className="group relative rounded-3xl bg-[#121212]/95 backdrop-blur-2xl border border-white/10 hover:border-emerald-500/70 shadow-2xl hover:shadow-[0_0_35px_rgba(16,185,129,0.25)] transition-all duration-300 flex flex-col justify-between h-full overflow-hidden"
+                whileHover={{ scale: 1.02, rotateY: idx % 2 === 0 ? 3 : -3, rotateX: -2, y: -8 }}
+                style={{ transformStyle: 'preserve-3d' }}
+                className="group relative rounded-3xl bg-[#121212]/95 backdrop-blur-2xl border border-white/10 hover:border-emerald-500/70 shadow-2xl hover:shadow-[0_0_40px_rgba(16,185,129,0.25)] transition-all duration-300 flex flex-col justify-between h-full overflow-hidden"
               >
                 {/* Subtle Radial Emerald Glow on Hover */}
-                <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/25 transition-all duration-500 pointer-events-none" />
+                <div className="absolute -top-24 -right-24 w-56 h-56 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/25 transition-all duration-500 pointer-events-none" />
 
                 <div className="p-6 sm:p-7 flex flex-col justify-between h-full space-y-5 relative z-10">
                   <div>
@@ -175,15 +184,15 @@ export default function OurWork({ onOpenQuoteModal }) {
                       </div>
                     </div>
 
-                    {/* Image Banner */}
-                    <div className="relative h-56 rounded-2xl overflow-hidden mb-5 border border-white/10 shadow-xl group-hover:border-emerald-500/40 transition-colors">
+                    {/* High-Resolution Professional Image Banner */}
+                    <div className="relative h-56 rounded-2xl overflow-hidden mb-5 border border-white/10 shadow-xl group-hover:border-emerald-500/50 transition-colors">
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                        className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent opacity-80" />
-                      <span className="absolute bottom-3 left-3 text-[11px] font-mono font-medium text-emerald-200 bg-[#0a0a0a]/80 backdrop-blur-md px-3 py-1 rounded-lg border border-emerald-500/30">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/20 to-transparent opacity-85" />
+                      <span className="absolute bottom-3 left-3 text-[11px] font-mono font-medium text-emerald-200 bg-[#0a0a0a]/90 backdrop-blur-md px-3 py-1 rounded-lg border border-emerald-500/40 shadow-md">
                         {project.category}
                       </span>
                     </div>
