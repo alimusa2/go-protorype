@@ -26,7 +26,7 @@ export default function LoadingScreen({ onFinish }) {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.6, ease: 'easeInOut' } }}
-          className="fixed inset-0 z-[9999] bg-[#0a0a0a] flex items-center justify-center overflow-hidden select-none"
+          className="fixed inset-0 z-[9999] bg-[#041416] flex items-center justify-center overflow-hidden select-none"
         >
           <video
             ref={videoRef}
@@ -35,7 +35,7 @@ export default function LoadingScreen({ onFinish }) {
             muted
             playsInline
             onEnded={handleVideoEnd}
-            className="max-w-full max-h-full object-contain pointer-events-none"
+            className="w-full h-full object-cover pointer-events-none"
           />
         </motion.div>
       )}

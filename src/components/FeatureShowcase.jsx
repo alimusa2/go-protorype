@@ -1,13 +1,13 @@
 import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
 import { 
   Bot, BarChart3, Users, GitMerge, MoreHorizontal, 
-  FileText, ArrowDown, Sparkles, ArrowRight, ShieldCheck
+  FileText, Sparkles, ArrowRight, ShieldCheck
 } from 'lucide-react';
 
 export default function FeatureShowcase() {
   const [activeBar, setActiveBar] = useState(4);
-  const [activeDoor, setActiveDoor] = useState('door-1');
+  const [activeDoorIndex, setActiveDoorIndex] = useState(0);
   const rightColumnRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -15,8 +15,19 @@ export default function FeatureShowcase() {
     offset: ["start center", "end center"]
   });
 
-  const glowTopPercentage = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const lineHeightPercentage = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 70,
+    damping: 20,
+    restDelta: 0.001
+  });
+
+  const glowTopPercentage = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
+  const lineHeightPercentage = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
+
+  useMotionValueEvent(smoothProgress, "change", (latest) => {
+    const idx = Math.min(Math.floor(latest * 4), 3);
+    setActiveDoorIndex(idx);
+  });
 
   const doors = [
     {
@@ -157,21 +168,20 @@ export default function FeatureShowcase() {
 
             {doors.map((door, index) => {
               const IconComp = door.icon;
-              const isActive = activeDoor === door.id;
+              const isActive = activeDoorIndex === index;
 
               return (
                 <motion.div
                   key={door.id}
-                  onMouseEnter={() => setActiveDoor(door.id)}
-                  onViewportEnter={() => setActiveDoor(door.id)}
-                  viewport={{ amount: 0.4 }}
+                  onMouseEnter={() => setActiveDoorIndex(index)}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className={`group relative rounded-3xl p-5 sm:p-6 transition-all duration-300 border shadow-2xl ${
+                  className={`group relative rounded-3xl p-5 sm:p-6 transition-all duration-500 border shadow-2xl ${
                     isActive
                       ? 'bg-[#141414] border-emerald-500/80 shadow-[0_0_30px_rgba(16,185,129,0.2)] ring-1 ring-emerald-500/30'
-                      : 'bg-[#121212]/90 border-white/10 hover:border-emerald-500/40 opacity-85 hover:opacity-100'
+                      : 'bg-[#121212]/90 border-white/10 hover:border-emerald-500/40 opacity-80 hover:opacity-100'
                   }`}
                 >
                   {/* Timeline Indicator Dot on Left (Centered on left-0 line) */}
