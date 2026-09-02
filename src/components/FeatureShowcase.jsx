@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { 
   Bot, BarChart3, Users, GitMerge, MoreHorizontal, 
   FileText, Sparkles, ArrowRight, ShieldCheck
@@ -12,21 +12,15 @@ export default function FeatureShowcase() {
 
   const { scrollYProgress } = useScroll({
     target: rightColumnRef,
-    offset: ["start center", "end center"]
+    offset: ["start 140px", "end 75%"]
   });
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
-    damping: 20,
-    restDelta: 0.001
-  });
+  const glowTopPercentage = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const lineHeightPercentage = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
-  const glowTopPercentage = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
-  const lineHeightPercentage = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
-
-  useMotionValueEvent(smoothProgress, "change", (latest) => {
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const idx = Math.min(Math.floor(latest * 4), 3);
-    setActiveDoorIndex(idx);
+    setActiveDoorIndex(Math.max(0, idx));
   });
 
   const doors = [
