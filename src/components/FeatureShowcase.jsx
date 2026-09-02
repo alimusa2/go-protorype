@@ -13,10 +13,15 @@ export default function FeatureShowcase() {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start top", "end bottom"]
+    offset: ["start start", "end end"]
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    // When section is above viewport (scrolled past), progress hits 1.
+    // Don't snap to step 4 — keep wherever we are.
+    if (latest >= 0.99) return;
+
+    // When section is below viewport (not reached yet), progress = 0 → step 1.
     let step = 1;
     if (latest < 0.25) step = 1;
     else if (latest < 0.50) step = 2;
