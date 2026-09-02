@@ -5,7 +5,7 @@ import Radar from './Radar';
 
 export default function Hero({ onOpenQuoteModal }) {
   return (
-    <section id="hero" className="relative min-h-[75vh] flex items-center justify-center pt-28 pb-14 sm:pt-32 sm:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0a0a0a]">
+    <section id="hero" className="relative min-h-[85vh] flex items-center justify-center pt-32 pb-20 sm:pt-36 sm:pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0a0a0a]">
       {/* Radar Animation Background with Website Emerald Palette */}
       <div className="absolute inset-0 z-0 opacity-45 pointer-events-none overflow-hidden flex items-center justify-center">
         <Radar
@@ -63,6 +63,16 @@ export default function Hero({ onOpenQuoteModal }) {
             & Better with AI
           </span>
         </motion.h1>
+
+        {/* Subtitle Paragraph Description */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.25 }}
+          className="mt-6 text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed font-normal"
+        >
+          We engineer high-performance AI automations, custom workflows, and intelligent software systems tailored to scale your enterprise operations.
+        </motion.p>
 
         {/* CTA Buttons */}
         <motion.div

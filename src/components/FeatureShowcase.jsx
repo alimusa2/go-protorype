@@ -8,14 +8,14 @@ import {
 export default function FeatureShowcase() {
   const [activeBar, setActiveBar] = useState(4);
   const [activeDoor, setActiveDoor] = useState('door-1');
-  const sectionRef = useRef(null);
+  const rightColumnRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"]
+    target: rightColumnRef,
+    offset: ["start 70%", "end 60%"]
   });
 
-  const glowTopPercentage = useTransform(scrollYProgress, [0, 1], ["5%", "90%"]);
+  const glowTopPercentage = useTransform(scrollYProgress, [0, 1], ["0%", "88%"]);
   const lineHeightPercentage = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const doors = [
@@ -58,7 +58,7 @@ export default function FeatureShowcase() {
   ];
 
   return (
-    <section ref={sectionRef} id="what-we-offer" className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#0d0d0d] overflow-hidden">
+    <section id="what-we-offer" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#0d0d0d] overflow-hidden">
       {/* Background star pattern & ambient neon green glow */}
       <div className="absolute inset-0 star-pattern opacity-40 pointer-events-none" />
       <div className="glow-blob glow-top-left" />
@@ -67,18 +67,18 @@ export default function FeatureShowcase() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Split Layout: Left Intact Sticky Card + Animated Scroll Glow Line + Right Scrolling Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start relative">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start relative">
           
-          {/* Left Intact Sticky Card (Stays fixed in place while right cards scroll) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28">
+          {/* Left Intact Sticky Card (Stays fixed in place while right cards scroll down) */}
+          <div className="lg:col-span-5 lg:sticky lg:top-28 z-20">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="rounded-3xl p-6 sm:p-8 bg-[#121212]/95 backdrop-blur-2xl border border-white/15 shadow-2xl shadow-emerald-950/20 space-y-6 relative overflow-hidden group hover:border-emerald-500/50 transition-all duration-300"
+              className="rounded-3xl p-6 sm:p-8 bg-[#121212]/95 backdrop-blur-2xl border border-emerald-500/40 shadow-2xl shadow-emerald-950/40 space-y-6 relative overflow-hidden group hover:border-emerald-400 transition-all duration-300"
             >
               {/* Subtle card ambient top glow */}
-              <div className="absolute -top-24 -left-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-emerald-500/20 transition-all duration-500" />
+              <div className="absolute -top-24 -left-24 w-56 h-56 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/25 transition-all duration-500" />
 
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 text-xs font-semibold uppercase tracking-wider shadow-lg shadow-emerald-950/50">
                 <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
@@ -129,15 +129,15 @@ export default function FeatureShowcase() {
           </div>
 
           {/* Right Column: Scrollable Cards with Vertical Timeline Line & Animated Scroll Glow Effect */}
-          <div className="lg:col-span-7 space-y-8 relative pl-0 sm:pl-8">
+          <div ref={rightColumnRef} className="lg:col-span-7 space-y-16 sm:space-y-24 relative pl-0 sm:pl-10 pt-2 pb-8">
             
             {/* Base Center Vertical Timeline Line */}
-            <div className="absolute top-4 bottom-4 left-0 w-1 bg-white/10 hidden sm:block pointer-events-none rounded-full" />
+            <div className="absolute top-6 bottom-6 left-0 w-1 bg-white/10 hidden sm:block pointer-events-none rounded-full" />
 
             {/* Dynamic Scroll-Glow Active Line (Fills down as user scrolls) */}
             <motion.div 
               style={{ height: lineHeightPercentage }}
-              className="absolute top-4 left-0 w-1 bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-400 hidden sm:block pointer-events-none rounded-full shadow-[0_0_12px_#10b981]"
+              className="absolute top-6 left-0 w-1 bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-400 hidden sm:block pointer-events-none rounded-full shadow-[0_0_12px_#10b981]"
             />
 
             {/* Scroll Glow Traveling Pointer (Moves DOWN dynamically as user scrolls) */}
@@ -163,27 +163,32 @@ export default function FeatureShowcase() {
                 <motion.div
                   key={door.id}
                   onMouseEnter={() => setActiveDoor(door.id)}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`group relative rounded-3xl p-6 sm:p-8 transition-all duration-300 border shadow-2xl ${
+                  onViewportEnter={() => setActiveDoor(door.id)}
+                  viewport={{ margin: "-20% 0px -20% 0px" }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  className={`group relative rounded-3xl p-6 sm:p-8 transition-all duration-500 border shadow-2xl ${
                     isActive
-                      ? 'bg-[#141414] border-emerald-500/60 shadow-emerald-950/40 ring-1 ring-emerald-500/30'
-                      : 'bg-[#121212]/90 border-white/10 hover:border-emerald-500/40'
+                      ? 'bg-[#141414] border-emerald-500/80 shadow-[0_0_35px_rgba(16,185,129,0.25)] ring-1 ring-emerald-500/40 scale-[1.01]'
+                      : 'bg-[#121212]/90 border-white/10 hover:border-emerald-500/40 opacity-80 hover:opacity-100'
                   }`}
                 >
                   {/* Timeline Indicator Dot on Left */}
                   <div
-                    className={`absolute -left-[37px] top-9 w-4 h-4 rounded-full border-2 border-[#0d0d0d] hidden sm:block transition-all duration-300 ${
-                      isActive ? 'bg-emerald-400 shadow-[0_0_14px_#10b981] scale-125' : 'bg-gray-700'
+                    className={`absolute -left-[45px] top-9 w-4.5 h-4.5 rounded-full border-2 border-[#0d0d0d] hidden sm:block transition-all duration-300 ${
+                      isActive ? 'bg-emerald-400 shadow-[0_0_16px_#10b981] scale-125' : 'bg-gray-700'
                     }`}
                   />
 
                   {/* Top Bar: DOOR Step Badge + Price Tag */}
                   <div className="flex items-center justify-between mb-5 flex-wrap gap-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-mono font-bold tracking-widest text-emerald-400 bg-emerald-950/80 border border-emerald-500/40 px-3 py-1 rounded-full uppercase">
+                      <span className={`text-[11px] font-mono font-bold tracking-widest px-3 py-1 rounded-full uppercase transition-colors ${
+                        isActive
+                          ? 'text-emerald-300 bg-emerald-950 border border-emerald-500/60'
+                          : 'text-gray-400 bg-[#1e1e1e] border border-white/10'
+                      }`}>
                         {door.doorNumber}
                       </span>
                       <h3 className="text-xl sm:text-2xl font-extrabold text-white group-hover:text-emerald-300 transition-colors">
@@ -196,7 +201,7 @@ export default function FeatureShowcase() {
                     </span>
                   </div>
 
-                  <p className="text-gray-400 text-sm sm:text-base mb-6 leading-relaxed">
+                  <p className="text-gray-300 text-sm sm:text-base mb-6 leading-relaxed">
                     {door.subtitle}
                   </p>
 
