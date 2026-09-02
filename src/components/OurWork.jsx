@@ -1,8 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Layers, ArrowUpRight, TrendingUp, Sparkles, X, Search, CheckCircle2, ShieldCheck, Cpu } from 'lucide-react';
 import { projectsData } from '../data/siteData';
 import PixelCard from './PixelCard';
+
+function AnimatedCounter({ value, suffix = '', decimals = 0, duration = 1.6 }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTimestamp = null;
+    const targetValue = parseFloat(value);
+    
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+      // Smooth easeOutCubic
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      setCount(easedProgress * targetValue);
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  }, [value, duration]);
+
+  return (
+    <span>
+      {count.toFixed(decimals)}
+      {suffix}
+    </span>
+  );
+}
 
 export default function OurWork({ onOpenQuoteModal }) {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -59,7 +89,7 @@ export default function OurWork({ onOpenQuoteModal }) {
             Explore real enterprise deployments powered by sub-second RAG architectures, custom LLMs, and high-concurrency microservices.
           </motion.p>
 
-          {/* Quick Metrics Bar */}
+          {/* Quick Metrics Bar with Animated Count Up */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -67,13 +97,15 @@ export default function OurWork({ onOpenQuoteModal }) {
             className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto"
           >
             {[
-              { label: 'Deploys Completed', val: '45+' },
-              { label: 'Avg ROI Increase', val: '340%' },
-              { label: 'System Uptime SLA', val: '99.9%' },
-              { label: 'Client Retention', val: '98%' }
+              { label: 'Deploys Completed', target: 45, suffix: '+', decimals: 0 },
+              { label: 'Avg ROI Increase', target: 340, suffix: '%', decimals: 0 },
+              { label: 'System Uptime SLA', target: 99.9, suffix: '%', decimals: 1 },
+              { label: 'Client Retention', target: 98, suffix: '%', decimals: 0 }
             ].map((m, idx) => (
-              <div key={idx} className="p-3.5 rounded-2xl bg-[#121212] border border-white/10 text-center">
-                <div className="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono">{m.val}</div>
+              <div key={idx} className="p-3.5 rounded-2xl bg-[#121212] border border-white/10 hover:border-emerald-500/40 text-center transition-colors shadow-lg">
+                <div className="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono">
+                  <AnimatedCounter value={m.target} suffix={m.suffix} decimals={m.decimals} />
+                </div>
                 <div className="text-[11px] text-gray-400 font-medium uppercase mt-0.5">{m.label}</div>
               </div>
             ))}

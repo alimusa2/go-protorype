@@ -12,10 +12,10 @@ export default function FeatureShowcase() {
 
   const { scrollYProgress } = useScroll({
     target: rightColumnRef,
-    offset: ["start 65%", "end 65%"]
+    offset: ["start center", "end center"]
   });
 
-  const glowTopPercentage = useTransform(scrollYProgress, [0, 1], ["2%", "92%"]);
+  const glowTopPercentage = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const lineHeightPercentage = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const doors = [
@@ -131,26 +131,26 @@ export default function FeatureShowcase() {
           {/* Right Column: Scrollable Compact Cards with Centered Vertical Timeline Line & Animated Glow Pointer */}
           <div ref={rightColumnRef} className="lg:col-span-7 space-y-12 sm:space-y-16 relative pl-0 sm:pl-10 pt-0 pb-6">
             
-            {/* Base Center Vertical Timeline Line (Aligned to left-0 = center of dot) */}
-            <div className="absolute top-6 bottom-6 left-0 w-1 bg-white/15 hidden sm:block pointer-events-none rounded-full" />
+            {/* Base Center Vertical Timeline Line (Starts top of first card, ends bottom of last card) */}
+            <div className="absolute top-0 bottom-0 left-0 w-1.5 bg-white/15 hidden sm:block pointer-events-none rounded-full" />
 
-            {/* Dynamic Scroll-Glow Active Line (Fills down as user scrolls) */}
+            {/* Dynamic Scroll-Glow Active Line (Fills down from 0% to 100% as user scrolls) */}
             <motion.div 
               style={{ height: lineHeightPercentage }}
-              className="absolute top-6 left-0 w-1 bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-400 hidden sm:block pointer-events-none rounded-full shadow-[0_0_12px_#10b981]"
+              className="absolute top-0 left-0 w-1.5 bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-400 hidden sm:block pointer-events-none rounded-full shadow-[0_0_14px_#10b981]"
             />
 
-            {/* Scroll Glow Traveling Pointer (Centered exactly on left-0 vertical line) */}
+            {/* Scroll Glow Traveling Green Circle Dot (Matching reference screenshot) */}
             <motion.div 
               style={{ top: glowTopPercentage }}
-              className="hidden sm:flex absolute left-[2px] -translate-x-1/2 z-20 items-center justify-center pointer-events-none transition-all duration-75"
+              className="hidden sm:flex absolute left-[3px] -translate-x-1/2 -translate-y-1/2 z-20 items-center justify-center pointer-events-none transition-all duration-75"
             >
               <div className="relative flex items-center justify-center">
-                {/* Glowing Outer Halo */}
-                <div className="absolute w-9 h-9 rounded-full bg-emerald-400/40 blur-md animate-pulse" />
-                {/* Glowing Neon Arrow Circle */}
-                <div className="relative w-8 h-8 rounded-full bg-[#0a0a0a] border-2 border-emerald-400 text-emerald-300 shadow-[0_0_18px_#10b981] flex items-center justify-center">
-                  <ArrowDown className="w-3.5 h-3.5 text-emerald-400 stroke-[3] animate-bounce" />
+                {/* Outer Glowing Halo */}
+                <div className="absolute w-8 h-8 rounded-full bg-emerald-400/50 blur-md animate-pulse" />
+                {/* Solid Emerald Dot Circle */}
+                <div className="relative w-6 h-6 rounded-full bg-emerald-400 border-2 border-[#0d0d0d] shadow-[0_0_16px_#10b981] flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-white animate-ping" />
                 </div>
               </div>
             </motion.div>

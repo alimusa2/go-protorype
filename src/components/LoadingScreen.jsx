@@ -35,7 +35,7 @@ export default function LoadingScreen({ onFinish }) {
             muted
             playsInline
             onEnded={handleVideoEnd}
-            className="w-full h-full object-cover pointer-events-none"
+            className="max-w-full max-h-full object-contain pointer-events-none"
           />
         </motion.div>
       )}
