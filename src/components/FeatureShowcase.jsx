@@ -184,13 +184,6 @@ export default function FeatureShowcase() {
                       : 'bg-[#121212]/90 border-white/10 hover:border-emerald-500/40 opacity-80 hover:opacity-100'
                   }`}
                 >
-                  {/* Timeline Indicator Dot on Left (Centered on left-0 line) */}
-                  <div
-                    className={`absolute -left-[44px] top-7 w-4 h-4 rounded-full border-2 border-[#0d0d0d] hidden sm:block transition-all duration-300 ${
-                      isActive ? 'bg-emerald-400 shadow-[0_0_14px_#10b981] scale-125' : 'bg-gray-700'
-                    }`}
-                  />
-
                   {/* Top Bar: DOOR Step Badge + Price Tag */}
                   <div className="flex items-center justify-between mb-3.5 flex-wrap gap-2">
                     <div className="flex items-center gap-2">
