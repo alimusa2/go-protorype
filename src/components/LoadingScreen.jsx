@@ -6,7 +6,7 @@ export default function LoadingScreen({ onFinish }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Fast loading progress animation (completes in ~700ms)
+    // Elegant loading progress animation (completes smoothly in ~2.2s)
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -14,12 +14,12 @@ export default function LoadingScreen({ onFinish }) {
           setTimeout(() => {
             setIsVisible(false);
             if (onFinish) onFinish();
-          }, 200);
+          }, 300);
           return 100;
         }
-        return prev + 12;
+        return prev + 2;
       });
-    }, 45);
+    }, 40);
 
     return () => clearInterval(interval);
   }, [onFinish]);
