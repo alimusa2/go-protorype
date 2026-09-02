@@ -58,7 +58,7 @@ export default function FeatureShowcase() {
   ];
 
   return (
-    <section id="what-we-offer" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#0d0d0d] overflow-hidden">
+    <section id="what-we-offer" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#0d0d0d] overflow-clip">
       {/* Background star pattern & ambient neon green glow */}
       <div className="absolute inset-0 star-pattern opacity-40 pointer-events-none" />
       <div className="glow-blob glow-top-left" />
@@ -70,7 +70,7 @@ export default function FeatureShowcase() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start relative">
           
           {/* Left Intact Sticky Card (Stays fixed in place while right cards scroll down) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 z-20">
+          <div className="lg:col-span-5 lg:sticky lg:top-28 z-20 self-start">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

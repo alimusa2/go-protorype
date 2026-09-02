@@ -41,7 +41,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-gray-200 font-sans relative selection:bg-emerald-600 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#0a0a0a] text-gray-200 font-sans relative selection:bg-emerald-600 selection:text-white overflow-x-clip">
       {/* 0. Initial Animated Video Loading Screen */}
       <LoadingScreen />
 
