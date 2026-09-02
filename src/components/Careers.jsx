@@ -69,35 +69,44 @@ export default function Careers() {
 
         {/* Culture & Perks Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 rounded-3xl bg-[#141414] border border-white/10 space-y-3 shadow-xl">
-            <div className="p-3 rounded-2xl bg-emerald-950 text-emerald-400 w-fit border border-emerald-500/30">
+          <motion.div
+            whileHover={{ y: -4 }}
+            className="p-6 rounded-3xl bg-[#121212]/95 backdrop-blur-2xl border border-white/10 hover:border-emerald-500/60 space-y-3 shadow-2xl hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] transition-all duration-300 group"
+          >
+            <div className="p-3 rounded-2xl bg-emerald-950 text-emerald-400 w-fit border border-emerald-500/40 group-hover:scale-110 transition-transform">
               <Zap className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-white">Top 5% Pay & Equity</h3>
-            <p className="text-xs text-gray-400 leading-relaxed">
+            <h3 className="text-lg font-extrabold text-white group-hover:text-emerald-300 transition-colors">Top 5% Pay & Equity</h3>
+            <p className="text-xs text-gray-300 leading-relaxed">
               We offer top-market compensation, generous stock options, and annual performance bonuses for high impact.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="p-6 rounded-3xl bg-[#141414] border border-white/10 space-y-3 shadow-xl">
-            <div className="p-3 rounded-2xl bg-emerald-950 text-emerald-400 w-fit border border-emerald-500/30">
+          <motion.div
+            whileHover={{ y: -4 }}
+            className="p-6 rounded-3xl bg-[#121212]/95 backdrop-blur-2xl border border-white/10 hover:border-emerald-500/60 space-y-3 shadow-2xl hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] transition-all duration-300 group"
+          >
+            <div className="p-3 rounded-2xl bg-emerald-950 text-emerald-400 w-fit border border-emerald-500/40 group-hover:scale-110 transition-transform">
               <Building2 className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-white">Remote-First Flexibility</h3>
-            <p className="text-xs text-gray-400 leading-relaxed">
+            <h3 className="text-lg font-extrabold text-white group-hover:text-emerald-300 transition-colors">Remote-First Flexibility</h3>
+            <p className="text-xs text-gray-300 leading-relaxed">
               Work from anywhere in the world with flexible hours, home office stipends, and annual international team retreats.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="p-6 rounded-3xl bg-[#141414] border border-white/10 space-y-3 shadow-xl">
-            <div className="p-3 rounded-2xl bg-emerald-950 text-emerald-400 w-fit border border-emerald-500/30">
+          <motion.div
+            whileHover={{ y: -4 }}
+            className="p-6 rounded-3xl bg-[#121212]/95 backdrop-blur-2xl border border-white/10 hover:border-emerald-500/60 space-y-3 shadow-2xl hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] transition-all duration-300 group"
+          >
+            <div className="p-3 rounded-2xl bg-emerald-950 text-emerald-400 w-fit border border-emerald-500/40 group-hover:scale-110 transition-transform">
               <Sparkles className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-white">Dedicated Compute Budget</h3>
-            <p className="text-xs text-gray-400 leading-relaxed">
+            <h3 className="text-lg font-extrabold text-white group-hover:text-emerald-300 transition-colors">Dedicated Compute Budget</h3>
+            <p className="text-xs text-gray-300 leading-relaxed">
               Unrestricted GPU compute budget to train, benchmark, and experiment with state-of-the-art AI architectures.
             </p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Open Positions Section */}
@@ -133,24 +142,28 @@ export default function Careers() {
                 <motion.div
                   key={job.id}
                   layout
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: index * 0.08 }}
-                  className="group rounded-3xl premium-card p-6 sm:p-7 flex flex-col justify-between h-full shadow-xl border border-white/10 hover:border-emerald-500/40"
+                  whileHover={{ y: -6 }}
+                  className="group relative rounded-3xl bg-[#121212]/95 backdrop-blur-2xl p-6 sm:p-7 flex flex-col justify-between h-full shadow-2xl border border-white/10 hover:border-emerald-500/70 hover:shadow-[0_0_35px_rgba(16,185,129,0.25)] transition-all duration-300 overflow-hidden"
                 >
-                  <div>
+                  {/* Top Subtle Hover Light Glow */}
+                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/25 transition-all duration-500 pointer-events-none" />
+
+                  <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-[10px] font-mono font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-3 py-1 rounded-full uppercase">
+                      <span className="text-[10px] font-mono font-bold text-emerald-300 bg-emerald-950/90 border border-emerald-500/50 px-3 py-1 rounded-full uppercase shadow-sm">
                         {job.department}
                       </span>
                       <span className="text-[11px] text-gray-400 font-mono flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5 text-gray-500" />
+                        <Clock className="w-3.5 h-3.5 text-emerald-400" />
                         {job.type}
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
+                    <h3 className="text-xl font-extrabold text-white mb-2 group-hover:text-emerald-300 transition-colors">
                       {job.title}
                     </h3>
 
@@ -159,18 +172,18 @@ export default function Careers() {
                       <span>{job.location}</span>
                     </div>
 
-                    <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-6">
+                    <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-6">
                       {job.description}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-white/10">
+                  <div className="pt-4 border-t border-white/10 relative z-10">
                     <button
                       onClick={() => setSelectedJob(job)}
-                      className="w-full py-3 rounded-full bg-[#1e1e1e] hover:bg-emerald-600 text-gray-200 hover:text-white font-semibold text-xs border border-white/10 hover:border-emerald-400/40 transition-all flex items-center justify-center gap-2 group/btn shadow-md"
+                      className="w-full py-3 rounded-full bg-[#1c1c1c] hover:bg-gradient-to-r hover:from-[#1a7a4a] hover:to-emerald-600 text-gray-200 hover:text-white font-semibold text-xs border border-white/15 hover:border-emerald-400/50 transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-md"
                     >
                       <span>Apply for Position</span>
-                      <ArrowRight className="w-4 h-4 text-emerald-400 group-hover/btn:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 text-emerald-400 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 </motion.div>

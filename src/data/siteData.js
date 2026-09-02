@@ -6,15 +6,17 @@ export const navLinks = [
   { name: 'Career', href: '#careers' },
 ];
 
-export const trustLogos = [
-  { name: 'Apple Pay', logo: 'Pay' },
-  { name: 'Amazon', logo: 'amazon' },
-  { name: 'Google+', logo: 'Google+' },
-  { name: 'Microsoft', logo: 'Microsoft' },
-  { name: 'MetaLB', logo: 'MetaLB' },
-  { name: 'Zapier', logo: 'zapier' },
-  { name: 'LinkedIn', logo: 'LinkedIn' },
-  { name: 'Instagram', logo: 'Instagram' },
+export const automationTechStack = [
+  { name: 'n8n', tag: 'WORKFLOW AUTOMATION', category: 'Automation' },
+  { name: 'Vapi AI', tag: 'VOICE AI AGENTS', category: 'Voice AI' },
+  { name: 'Retell AI', tag: 'CONVERSATIONAL VOICE', category: 'Voice AI' },
+  { name: 'Python', tag: 'DATA & AI BACKEND', category: 'AI Stack' },
+  { name: 'Zapier', tag: 'INTEGRATION PIPELINES', category: 'Automation' },
+  { name: 'Make.com', tag: 'COMPLEX WORKFLOWS', category: 'Automation' },
+  { name: 'MERN Stack', tag: 'MONGO • EXPRESS • REACT • NODE', category: 'Full Stack' },
+  { name: 'OpenAI', tag: 'LLM & EMBEDDINGS', category: 'AI Models' },
+  { name: 'LangChain', tag: 'AGENTIC FRAMEWORKS', category: 'AI Stack' },
+  { name: 'Pinecone', tag: 'VECTOR DATABASE', category: 'Database' }
 ];
 
 export const servicesData = [

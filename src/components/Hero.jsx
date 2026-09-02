@@ -64,63 +64,11 @@ export default function Hero({ onOpenQuoteModal }) {
           </span>
         </motion.h1>
 
-        {/* Inline Category Tag Pill Sentence Container */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-6 sm:mt-8 p-2 rounded-full bg-[#121212]/90 backdrop-blur-xl border border-white/10 shadow-2xl flex flex-wrap items-center justify-center gap-2 max-w-3xl text-xs sm:text-sm text-gray-300"
-        >
-          <span className="pl-3 font-medium text-gray-400">For</span>
-
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="px-3.5 py-1 rounded-full bg-[#1e1e1e] border border-white/15 text-white font-semibold hover:border-emerald-500/50 hover:text-emerald-300 transition-all"
-          >
-            Startups
-          </motion.span>
-
-          <span className="text-gray-500 font-light">,</span>
-
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5 }}
-            className="px-3.5 py-1 rounded-full bg-[#1e1e1e] border border-white/15 text-white font-semibold hover:border-emerald-500/50 hover:text-emerald-300 transition-all"
-          >
-            Enterprise leaders
-          </motion.span>
-
-          <span className="text-gray-500 font-light">,</span>
-
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6 }}
-            className="px-3.5 py-1 rounded-full bg-[#1e1e1e] border border-white/15 text-white font-semibold hover:border-emerald-500/50 hover:text-emerald-300 transition-all"
-          >
-            Media & Publishers
-          </motion.span>
-
-          <span className="text-gray-400 font-medium pr-1">and</span>
-
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.7 }}
-            className="px-3.5 py-1 rounded-full bg-[#1e1e1e] border border-white/15 text-white font-semibold hover:border-emerald-500/50 hover:text-emerald-300 transition-all"
-          >
-            Social Good
-          </motion.span>
-        </motion.div>
-
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
         >
           {/* Dark / Outline Button */}

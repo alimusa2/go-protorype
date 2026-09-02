@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
   Bot, BarChart3, Users, GitMerge, MoreHorizontal, 
   FileText, ArrowDown, Sparkles, ArrowRight, ShieldCheck
@@ -8,6 +8,15 @@ import {
 export default function FeatureShowcase() {
   const [activeBar, setActiveBar] = useState(4);
   const [activeDoor, setActiveDoor] = useState('door-1');
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"]
+  });
+
+  const glowTopPercentage = useTransform(scrollYProgress, [0, 1], ["5%", "90%"]);
+  const lineHeightPercentage = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const doors = [
     {
@@ -49,7 +58,7 @@ export default function FeatureShowcase() {
   ];
 
   return (
-    <section id="what-we-offer" className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#0d0d0d] overflow-hidden">
+    <section ref={sectionRef} id="what-we-offer" className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#0d0d0d] overflow-hidden">
       {/* Background star pattern & ambient neon green glow */}
       <div className="absolute inset-0 star-pattern opacity-40 pointer-events-none" />
       <div className="glow-blob glow-top-left" />
@@ -57,92 +66,94 @@ export default function FeatureShowcase() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Split Layout: Left Intact Sticky Panel + Center Timeline Connector with Glowing Neon Arrow Pointer + Right Scrolling Cards */}
+        {/* Split Layout: Left Intact Sticky Card + Animated Scroll Glow Line + Right Scrolling Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start relative">
           
-          {/* Left Intact Sticky Column (Stays fixed while right cards scroll) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
-            <motion.div
+          {/* Left Intact Sticky Card (Stays fixed in place while right cards scroll) */}
+          <div className="lg:col-span-5 lg:sticky lg:top-28">
+            <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 text-xs font-semibold uppercase tracking-wider shadow-lg shadow-emerald-950/50"
+              className="rounded-3xl p-6 sm:p-8 bg-[#121212]/95 backdrop-blur-2xl border border-white/15 shadow-2xl shadow-emerald-950/20 space-y-6 relative overflow-hidden group hover:border-emerald-500/50 transition-all duration-300"
             >
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-              <span>SYSTEMS WE BUILD</span>
-            </motion.div>
+              {/* Subtle card ambient top glow */}
+              <div className="absolute -top-24 -left-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-emerald-500/20 transition-all duration-500" />
 
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-3xl sm:text-5xl lg:text-5xl font-extrabold text-white tracking-tight font-sans leading-[1.1]"
-            >
-              Systems built around <br className="hidden sm:inline" />
-              <span className="bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
-                real business work.
-              </span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-gray-400 text-base sm:text-lg leading-relaxed font-normal"
-            >
-              GoArrow brings digital systems, AI automation, custom workflows, and intelligent software into one accountable delivery model.
-            </motion.p>
-
-            {/* Quality & Standards Commitment Card */}
-            <div className="p-5 rounded-2xl bg-[#141414] border border-white/10 space-y-3 shadow-2xl">
-              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 uppercase tracking-wide">
-                <ShieldCheck className="w-4.5 h-4.5 text-emerald-400" />
-                <span>Operational Commitments</span>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 text-xs font-semibold uppercase tracking-wider shadow-lg shadow-emerald-950/50">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+                <span>SYSTEMS WE BUILD</span>
               </div>
-              <div className="flex flex-wrap gap-2 pt-1">
-                <span className="px-3 py-1.5 rounded-lg bg-[#1e1e1e] border border-emerald-500/40 text-[11px] font-mono text-emerald-300 shadow-sm">
-                  ISO 27001 Certified
-                </span>
-                <span className="px-3 py-1.5 rounded-lg bg-[#1e1e1e] border border-white/10 text-[11px] font-mono text-gray-300">
-                  99.9% Uptime SLA
-                </span>
-                <span className="px-3 py-1.5 rounded-lg bg-[#1e1e1e] border border-white/10 text-[11px] font-mono text-gray-300">
-                  Zero Data Leakage
-                </span>
-              </div>
-            </div>
 
-            {/* Link to capabilities */}
-            <div className="pt-2">
-              <a
-                href="#services"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 group transition-colors"
-              >
-                <span>View all capabilities</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
-          </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-4xl font-extrabold text-white tracking-tight font-sans leading-[1.15]">
+                Systems built around <br />
+                <span className="bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
+                  real business work.
+                </span>
+              </h2>
 
-          {/* Right Column: Scrollable Cards with Vertical Timeline Line & Neon Glowing Arrow Mid Pointer */}
-          <div className="lg:col-span-7 space-y-8 relative pl-0 sm:pl-8">
-            
-            {/* Center Vertical Timeline Line */}
-            <div className="absolute top-4 bottom-4 left-0 w-1 bg-gradient-to-b from-emerald-500 via-emerald-500/40 to-transparent hidden sm:block pointer-events-none rounded-full" />
+              <p className="text-gray-400 text-sm sm:text-base leading-relaxed font-normal">
+                GoArrow brings digital systems, AI automation, custom workflows, and intelligent software into one accountable delivery model.
+              </p>
 
-            {/* Mid Pointer: Downward-Pointing Neon Arrow Badge */}
-            <div className="hidden sm:flex absolute left-[-16px] top-1/2 -translate-y-1/2 z-20 items-center justify-center">
-              <div className="relative flex items-center justify-center">
-                {/* Glowing Outer Halo */}
-                <div className="absolute w-10 h-10 rounded-full bg-emerald-500/40 blur-md animate-pulse" />
-                {/* Glowing Neon Arrow Circle */}
-                <div className="relative w-9 h-9 rounded-full bg-[#0a0a0a] border-2 border-emerald-400 text-emerald-300 shadow-[0_0_20px_#10b981] flex items-center justify-center animate-bounce">
-                  <ArrowDown className="w-5 h-5 text-emerald-400 stroke-[3]" />
+              {/* Quality & Standards Commitment Card inside Left Main Card */}
+              <div className="p-4 rounded-2xl bg-[#0a0a0a] border border-white/10 space-y-3 shadow-inner">
+                <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 uppercase tracking-wide">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  <span>Operational Commitments</span>
+                </div>
+                <div className="flex flex-wrap gap-2 pt-0.5">
+                  <span className="px-3 py-1 rounded-lg bg-[#181818] border border-emerald-500/40 text-[11px] font-mono text-emerald-300 shadow-sm">
+                    ISO 27001 Certified
+                  </span>
+                  <span className="px-3 py-1 rounded-lg bg-[#181818] border border-white/10 text-[11px] font-mono text-gray-300">
+                    99.9% Uptime SLA
+                  </span>
+                  <span className="px-3 py-1 rounded-lg bg-[#181818] border border-white/10 text-[11px] font-mono text-gray-300">
+                    Zero Data Leakage
+                  </span>
                 </div>
               </div>
-            </div>
+
+              {/* Link to capabilities */}
+              <div className="pt-1">
+                <a
+                  href="#services"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 group/link transition-colors"
+                >
+                  <span>View all capabilities</span>
+                  <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Scrollable Cards with Vertical Timeline Line & Animated Scroll Glow Effect */}
+          <div className="lg:col-span-7 space-y-8 relative pl-0 sm:pl-8">
+            
+            {/* Base Center Vertical Timeline Line */}
+            <div className="absolute top-4 bottom-4 left-0 w-1 bg-white/10 hidden sm:block pointer-events-none rounded-full" />
+
+            {/* Dynamic Scroll-Glow Active Line (Fills down as user scrolls) */}
+            <motion.div 
+              style={{ height: lineHeightPercentage }}
+              className="absolute top-4 left-0 w-1 bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-400 hidden sm:block pointer-events-none rounded-full shadow-[0_0_12px_#10b981]"
+            />
+
+            {/* Scroll Glow Traveling Pointer (Moves DOWN dynamically as user scrolls) */}
+            <motion.div 
+              style={{ top: glowTopPercentage }}
+              className="hidden sm:flex absolute left-[-16px] z-20 items-center justify-center pointer-events-none transition-all duration-75"
+            >
+              <div className="relative flex items-center justify-center">
+                {/* Glowing Outer Halo */}
+                <div className="absolute w-10 h-10 rounded-full bg-emerald-400/50 blur-md animate-pulse" />
+                {/* Glowing Neon Arrow Circle */}
+                <div className="relative w-9 h-9 rounded-full bg-[#0a0a0a] border-2 border-emerald-400 text-emerald-300 shadow-[0_0_20px_#10b981] flex items-center justify-center">
+                  <ArrowDown className="w-4 h-4 text-emerald-400 stroke-[3] animate-bounce" />
+                </div>
+              </div>
+            </motion.div>
 
             {doors.map((door, index) => {
               const IconComp = door.icon;
@@ -165,7 +176,7 @@ export default function FeatureShowcase() {
                   {/* Timeline Indicator Dot on Left */}
                   <div
                     className={`absolute -left-[37px] top-9 w-4 h-4 rounded-full border-2 border-[#0d0d0d] hidden sm:block transition-all duration-300 ${
-                      isActive ? 'bg-emerald-400 shadow-[0_0_12px_#10b981]' : 'bg-gray-700'
+                      isActive ? 'bg-emerald-400 shadow-[0_0_14px_#10b981] scale-125' : 'bg-gray-700'
                     }`}
                   />
 

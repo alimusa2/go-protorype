@@ -97,24 +97,27 @@ export default function Blogs() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}
-            className="rounded-3xl bg-[#141414] border border-emerald-500/40 p-6 sm:p-8 overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center group"
+            whileHover={{ y: -4 }}
+            className="rounded-3xl bg-[#121212]/95 backdrop-blur-2xl border border-emerald-500/50 hover:border-emerald-400 p-6 sm:p-8 overflow-hidden shadow-2xl hover:shadow-[0_0_40px_rgba(16,185,129,0.25)] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center group transition-all duration-300 relative"
           >
-            <div className="lg:col-span-6 relative h-64 sm:h-80 rounded-2xl overflow-hidden border border-white/10">
-              <img src={featuredArticle.image} alt={featuredArticle.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent" />
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/20 transition-all duration-500" />
+
+            <div className="lg:col-span-6 relative h-64 sm:h-80 rounded-2xl overflow-hidden border border-white/10 shadow-xl group-hover:border-emerald-500/40 transition-colors">
+              <img src={featuredArticle.image} alt={featuredArticle.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent opacity-80" />
               <span className="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-emerald-950/90 border border-emerald-500/50 text-[10px] font-bold text-emerald-300 uppercase backdrop-blur-md flex items-center gap-1.5 shadow-lg">
                 <Flame className="w-4 h-4 text-emerald-400 animate-bounce" />
                 <span>FEATURED RESEARCH</span>
               </span>
             </div>
 
-            <div className="lg:col-span-6 space-y-4">
+            <div className="lg:col-span-6 space-y-4 relative z-10">
               <div className="flex items-center gap-3 text-xs text-gray-400 font-mono">
                 <span className="text-emerald-400 font-semibold">{featuredArticle.category}</span>
                 <span>•</span>
-                <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" />{featuredArticle.date}</span>
+                <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5 text-emerald-400" />{featuredArticle.date}</span>
                 <span>•</span>
-                <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" />{featuredArticle.readTime}</span>
+                <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5 text-emerald-400" />{featuredArticle.readTime}</span>
               </div>
 
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white group-hover:text-emerald-300 transition-colors leading-snug">
@@ -128,7 +131,7 @@ export default function Blogs() {
               <div className="pt-2">
                 <button
                   onClick={() => setSelectedArticle(featuredArticle)}
-                  className="px-6 py-3 rounded-full bg-gradient-to-r from-[#1a7a4a] to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 text-white font-semibold text-xs shadow-lg shadow-emerald-950/60 inline-flex items-center gap-2 transition-all"
+                  className="px-6 py-3 rounded-full bg-gradient-to-r from-[#1a7a4a] to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 text-white font-semibold text-xs shadow-lg shadow-emerald-950/60 inline-flex items-center gap-2 transition-all border border-emerald-400/30 hover:scale-105"
                 >
                   <span>Read Full Technical Report</span>
                   <ArrowUpRight className="w-4 h-4 text-emerald-200" />
@@ -139,28 +142,32 @@ export default function Blogs() {
         )}
 
         {/* Regular Articles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           <AnimatePresence mode="popLayout">
             {regularArticles.map((article, index) => (
               <motion.div
                 key={article.id}
                 layout
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="group rounded-3xl premium-card border border-white/10 hover:border-emerald-500/40 overflow-hidden flex flex-col justify-between h-full shadow-xl"
+                whileHover={{ y: -6 }}
+                className="group relative rounded-3xl bg-[#121212]/95 backdrop-blur-2xl border border-white/10 hover:border-emerald-500/70 shadow-2xl hover:shadow-[0_0_35px_rgba(16,185,129,0.25)] transition-all duration-300 overflow-hidden flex flex-col justify-between h-full"
               >
-                <div>
-                  <div className="relative h-48 overflow-hidden">
+                {/* Top Subtle Hover Light Glow */}
+                <div className="absolute -top-20 -right-20 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/25 transition-all duration-500 pointer-events-none" />
+
+                <div className="relative z-10">
+                  <div className="relative h-52 overflow-hidden border-b border-white/10 group-hover:border-emerald-500/40 transition-colors">
                     <img
                       src={article.image}
                       alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent opacity-80" />
                     
-                    <span className="absolute top-3 left-3 text-[10px] font-semibold text-emerald-300 bg-emerald-950/90 border border-emerald-500/40 px-3 py-1 rounded-full uppercase backdrop-blur-md">
+                    <span className="absolute top-3 left-3 text-[10px] font-semibold text-emerald-300 bg-emerald-950/90 border border-emerald-500/50 px-3 py-1 rounded-full uppercase backdrop-blur-md shadow-md">
                       {article.category}
                     </span>
                   </div>
@@ -168,32 +175,32 @@ export default function Blogs() {
                   <div className="p-6 space-y-3">
                     <div className="flex items-center gap-3 text-xs text-gray-400 font-mono">
                       <span className="flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5" />
+                        <Calendar className="w-3.5 h-3.5 text-emerald-400" />
                         {article.date}
                       </span>
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5" />
+                        <Clock className="w-3.5 h-3.5 text-emerald-400" />
                         {article.readTime}
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-white leading-snug group-hover:text-emerald-300 transition-colors">
+                    <h3 className="text-xl font-extrabold text-white leading-snug group-hover:text-emerald-300 transition-colors">
                       {article.title}
                     </h3>
 
-                    <p className="text-gray-400 text-xs sm:text-sm leading-relaxed line-clamp-3">
+                    <p className="text-gray-300 text-xs sm:text-sm leading-relaxed line-clamp-3">
                       {article.excerpt}
                     </p>
                   </div>
                 </div>
 
-                <div className="p-6 pt-0 border-t border-white/5 mt-4">
+                <div className="p-6 pt-0 border-t border-white/10 mt-4 relative z-10">
                   <button
                     onClick={() => setSelectedArticle(article)}
-                    className="w-full py-2.5 rounded-full bg-[#1e1e1e] hover:bg-emerald-700 text-gray-200 hover:text-white font-medium text-xs border border-white/10 hover:border-emerald-500/40 transition-all flex items-center justify-center gap-2 group/btn"
+                    className="w-full py-3 rounded-full bg-[#1c1c1c] hover:bg-gradient-to-r hover:from-[#1a7a4a] hover:to-emerald-600 text-gray-200 hover:text-white font-semibold text-xs border border-white/15 hover:border-emerald-400/50 transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-md"
                   >
-                    <span>Read Article</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                    <span>Read Technical Article</span>
+                    <ArrowUpRight className="w-4 h-4 text-emerald-400 group-hover/btn:text-white group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                   </button>
                 </div>
               </motion.div>

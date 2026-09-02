@@ -112,82 +112,82 @@ export default function OurWork({ onOpenQuoteModal }) {
           </div>
         </div>
 
-        {/* Grid of PixelCards featuring open-source React Bits canvas effect */}
+        {/* Grid of Premium Portfolio Case Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 items-stretch">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3, delay: idx * 0.05 }}
+                transition={{ duration: 0.4, delay: idx * 0.08 }}
+                whileHover={{ y: -6 }}
+                className="group relative rounded-3xl bg-[#121212]/95 backdrop-blur-2xl border border-white/10 hover:border-emerald-500/70 shadow-2xl hover:shadow-[0_0_35px_rgba(16,185,129,0.25)] transition-all duration-300 flex flex-col justify-between h-full overflow-hidden"
               >
-                <PixelCard
-                  variant={idx % 2 === 0 ? 'emerald' : 'emeraldGlow'}
-                  className="h-full group"
-                >
-                  <div className="p-6 sm:p-7 flex flex-col justify-between h-full space-y-6">
-                    <div>
-                      {/* Top Header Row */}
-                      <div className="flex items-center justify-between gap-2 mb-4">
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-500/50 text-emerald-300">
-                          {project.client}
-                        </span>
+                {/* Subtle Radial Emerald Glow on Hover */}
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/25 transition-all duration-500 pointer-events-none" />
 
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-bold font-mono">
-                          <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
-                          <span>{project.metric}</span>
-                        </div>
-                      </div>
+                <div className="p-6 sm:p-7 flex flex-col justify-between h-full space-y-5 relative z-10">
+                  <div>
+                    {/* Top Header Meta Row */}
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-3.5 py-1 rounded-full bg-emerald-950/90 border border-emerald-500/50 text-emerald-300 shadow-sm">
+                        {project.client}
+                      </span>
 
-                      {/* Image Banner */}
-                      <div className="relative h-52 rounded-2xl overflow-hidden mb-5 border border-white/10 shadow-lg">
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent opacity-80" />
-                        <span className="absolute bottom-3 left-3 text-[11px] font-mono text-gray-300 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10">
-                          {project.category}
-                        </span>
-                      </div>
-
-                      {/* Title & Description */}
-                      <h3 className="text-2xl font-bold text-white group-hover:text-emerald-300 transition-colors mb-2">
-                        {project.title}
-                      </h3>
-                      <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                        {project.description}
-                      </p>
-
-                      {/* Tech Stack Pills */}
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[11px] px-2.5 py-1 rounded-lg bg-[#1a1a1a] text-emerald-300 font-mono border border-white/10"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 text-xs font-bold font-mono shadow-sm">
+                        <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
+                        <span>{project.metric}</span>
                       </div>
                     </div>
 
-                    {/* Bottom Action Button */}
-                    <div className="pt-4 border-t border-white/10">
-                      <button
-                        onClick={() => setSelectedProject(project)}
-                        className="w-full py-3 rounded-full bg-[#1e1e1e] hover:bg-emerald-600 text-gray-200 hover:text-white font-semibold text-xs border border-white/10 hover:border-emerald-400/40 transition-all duration-200 flex items-center justify-center gap-2 group/btn shadow-md"
-                      >
-                        <span>View Case Details</span>
-                        <ArrowUpRight className="w-4 h-4 text-emerald-400 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                      </button>
+                    {/* Image Banner */}
+                    <div className="relative h-56 rounded-2xl overflow-hidden mb-5 border border-white/10 shadow-xl group-hover:border-emerald-500/40 transition-colors">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent opacity-80" />
+                      <span className="absolute bottom-3 left-3 text-[11px] font-mono font-medium text-emerald-200 bg-[#0a0a0a]/80 backdrop-blur-md px-3 py-1 rounded-lg border border-emerald-500/30">
+                        {project.category}
+                      </span>
+                    </div>
+
+                    {/* Title & Description */}
+                    <h3 className="text-2xl font-extrabold text-white group-hover:text-emerald-300 transition-colors mb-2.5 leading-snug">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-300 text-sm leading-relaxed mb-4 min-h-[48px]">
+                      {project.description}
+                    </p>
+
+                    {/* Tech Stack Tag Pills */}
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[11px] px-2.5 py-1 rounded-lg bg-[#181818] text-emerald-300 font-mono border border-white/10 group-hover:border-emerald-500/30 transition-colors"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                </PixelCard>
+
+                  {/* Bottom Action Button (Aligned at base) */}
+                  <div className="pt-4 border-t border-white/10 mt-4">
+                    <button
+                      onClick={() => setSelectedProject(project)}
+                      className="w-full py-3.5 rounded-full bg-[#1a1a1a] hover:bg-gradient-to-r hover:from-[#1a7a4a] hover:to-emerald-600 text-gray-200 hover:text-white font-semibold text-xs border border-white/15 hover:border-emerald-400/50 shadow-md transition-all duration-300 flex items-center justify-center gap-2 group/btn"
+                    >
+                      <span>View Case Details</span>
+                      <ArrowUpRight className="w-4 h-4 text-emerald-400 group-hover/btn:text-white group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                    </button>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </AnimatePresence>

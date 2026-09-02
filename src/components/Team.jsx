@@ -54,17 +54,20 @@ export default function Team() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}
-          className="rounded-3xl bg-gradient-to-r from-[#141414] via-[#161616] to-[#0a1f14] border border-emerald-500/40 p-6 sm:p-10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 group"
+          whileHover={{ y: -4 }}
+          className="rounded-3xl bg-gradient-to-r from-[#141414] via-[#161616] to-[#0d261a] border border-emerald-500/50 hover:border-emerald-400 p-6 sm:p-10 shadow-2xl hover:shadow-[0_0_40px_rgba(16,185,129,0.25)] transition-all duration-300 flex flex-col md:flex-row items-center justify-between gap-8 group relative overflow-hidden"
         >
-          <div className="relative shrink-0 w-36 h-36 sm:w-48 sm:h-48 rounded-2xl overflow-hidden border-2 border-emerald-500/50 shadow-2xl">
-            <img src={founder.avatar} alt={founder.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/20 transition-all duration-500" />
+
+          <div className="relative shrink-0 w-36 h-36 sm:w-48 sm:h-48 rounded-2xl overflow-hidden border-2 border-emerald-500/60 shadow-2xl group-hover:scale-105 transition-transform duration-500">
+            <img src={founder.avatar} alt={founder.name} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60" />
-            <span className="absolute bottom-3 left-3 text-[10px] font-mono text-emerald-300 font-bold bg-emerald-950/90 px-2.5 py-1 rounded border border-emerald-500/50 backdrop-blur-md">
+            <span className="absolute bottom-3 left-3 text-[10px] font-mono text-emerald-300 font-bold bg-emerald-950/90 px-2.5 py-1 rounded-md border border-emerald-500/60 backdrop-blur-md">
               FOUNDER & CEO
             </span>
           </div>
 
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 space-y-4 relative z-10">
             <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
               <Award className="w-4 h-4 text-emerald-400" />
               <span>Executive Spotlight</span>
@@ -85,7 +88,7 @@ export default function Team() {
             <div className="pt-2 flex flex-wrap items-center gap-4">
               <button
                 onClick={() => setSelectedMember(founder)}
-                className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#1a7a4a] to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 text-white font-semibold text-xs shadow-lg shadow-emerald-950/60 transition-all"
+                className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#1a7a4a] to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 text-white font-semibold text-xs shadow-lg shadow-emerald-950/60 transition-all border border-emerald-400/30 hover:scale-105"
               >
                 View Full Bio & Credentials
               </button>
@@ -93,7 +96,7 @@ export default function Team() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-full bg-[#1e1e1e] hover:bg-emerald-950 text-gray-400 hover:text-emerald-400 transition-all border border-white/10"
+                className="p-2.5 rounded-full bg-[#1e1e1e] hover:bg-emerald-950 text-gray-400 hover:text-emerald-400 transition-all border border-white/10 hover:border-emerald-500/40"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
@@ -104,8 +107,8 @@ export default function Team() {
 
         {/* Engineering Philosophy Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="p-5 rounded-2xl bg-[#141414] border border-white/10 space-y-2">
-            <div className="p-2 rounded-lg bg-emerald-950 text-emerald-400 w-fit">
+          <div className="p-6 rounded-2xl bg-[#121212]/90 border border-white/10 hover:border-emerald-500/40 space-y-3 shadow-xl transition-all hover:-translate-y-1">
+            <div className="p-2.5 rounded-xl bg-emerald-950 border border-emerald-500/30 text-emerald-400 w-fit">
               <BrainCircuit className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-white">Research-Backed Models</h3>
@@ -114,8 +117,8 @@ export default function Team() {
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#141414] border border-white/10 space-y-2">
-            <div className="p-2 rounded-lg bg-emerald-950 text-emerald-400 w-fit">
+          <div className="p-6 rounded-2xl bg-[#121212]/90 border border-white/10 hover:border-emerald-500/40 space-y-3 shadow-xl transition-all hover:-translate-y-1">
+            <div className="p-2.5 rounded-xl bg-emerald-950 border border-emerald-500/30 text-emerald-400 w-fit">
               <Code2 className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-white">Production-First Code</h3>
@@ -124,8 +127,8 @@ export default function Team() {
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#141414] border border-white/10 space-y-2">
-            <div className="p-2 rounded-lg bg-emerald-950 text-emerald-400 w-fit">
+          <div className="p-6 rounded-2xl bg-[#121212]/90 border border-white/10 hover:border-emerald-500/40 space-y-3 shadow-xl transition-all hover:-translate-y-1">
+            <div className="p-2.5 rounded-xl bg-emerald-950 border border-emerald-500/30 text-emerald-400 w-fit">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-white">Enterprise Privacy</h3>
@@ -146,46 +149,51 @@ export default function Team() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="group rounded-3xl premium-card p-6 flex flex-col justify-between h-full shadow-xl border border-white/10 hover:border-emerald-500/40"
+                whileHover={{ y: -6 }}
+                className="group relative rounded-3xl bg-[#121212]/95 backdrop-blur-2xl p-6 flex flex-col justify-between h-full shadow-2xl border border-white/10 hover:border-emerald-500/70 hover:shadow-[0_0_35px_rgba(16,185,129,0.25)] transition-all duration-300 overflow-hidden"
               >
-                <div>
-                  <div className="relative mb-5 overflow-hidden rounded-2xl aspect-square border border-white/10">
+                {/* Top Subtle Hover Light Glow */}
+                <div className="absolute -top-20 -right-20 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/25 transition-all duration-500 pointer-events-none" />
+
+                <div className="relative z-10">
+                  <div className="relative mb-5 overflow-hidden rounded-2xl aspect-square border border-white/10 group-hover:border-emerald-500/40 transition-colors shadow-lg">
                     <img
                       src={member.avatar}
                       alt={member.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent opacity-80" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent opacity-80" />
                     
-                    <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-500/40 text-[10px] text-emerald-300 font-bold uppercase backdrop-blur-md">
+                    <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-500/50 text-[10px] text-emerald-300 font-bold uppercase backdrop-blur-md shadow-md">
                       {member.specialty}
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">
+                  <h3 className="text-xl font-extrabold text-white group-hover:text-emerald-300 transition-colors">
                     {member.name}
                   </h3>
                   <p className="text-xs text-emerald-400 font-semibold uppercase tracking-wide mt-1 mb-3">
                     {member.role}
                   </p>
-                  <p className="text-gray-400 text-xs leading-relaxed line-clamp-3">
+                  <p className="text-gray-300 text-xs leading-relaxed line-clamp-3">
                     {member.bio}
                   </p>
                 </div>
 
-                <div className="pt-4 mt-5 border-t border-white/10 flex items-center justify-between">
+                <div className="pt-4 mt-5 border-t border-white/10 flex items-center justify-between relative z-10">
                   <button
                     onClick={() => setSelectedMember(member)}
-                    className="text-xs font-semibold text-emerald-400 hover:text-white transition-colors"
+                    className="text-xs font-semibold text-emerald-400 hover:text-white transition-colors flex items-center gap-1 group/btn"
                   >
-                    View Full Profile →
+                    <span>View Profile</span>
+                    <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
                   </button>
                   <a
                     href="https://linkedin.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn Profile"
-                    className="p-1.5 rounded-full bg-[#1e1e1e] hover:bg-emerald-950 text-gray-400 hover:text-emerald-400 transition-all"
+                    className="p-2 rounded-full bg-[#1c1c1c] hover:bg-emerald-950 text-gray-400 hover:text-emerald-400 border border-white/10 hover:border-emerald-500/40 transition-all"
                   >
                     <Linkedin className="w-4 h-4" />
                   </a>
