@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { 
   Bot, BarChart3, Users, GitMerge, MoreHorizontal, 
   FileText, Sparkles, ArrowRight, ShieldCheck
@@ -8,6 +8,25 @@ import Stepper, { Step } from './Stepper';
 
 export default function FeatureShowcase() {
   const [activeBar, setActiveBar] = useState(4);
+  const [activeStep, setActiveStep] = useState(1);
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start top", "end bottom"]
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    let step = 1;
+    if (latest < 0.25) step = 1;
+    else if (latest < 0.50) step = 2;
+    else if (latest < 0.75) step = 3;
+    else step = 4;
+
+    if (step !== activeStep) {
+      setActiveStep(step);
+    }
+  });
 
   const doors = [
     {
@@ -49,25 +68,27 @@ export default function FeatureShowcase() {
   ];
 
   return (
-    <section id="what-we-offer" className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#0d0d0d] overflow-clip">
+    <section ref={sectionRef} id="what-we-offer" className="relative h-[280vh] bg-[#0d0d0d]">
       {/* Background star pattern & ambient neon green glow */}
       <div className="absolute inset-0 star-pattern opacity-40 pointer-events-none" />
       <div className="glow-blob glow-top-left" />
       <div className="glow-blob glow-bottom-left opacity-30" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        
-        {/* Split Layout: Left Intact Sticky Card + Right React Bits Stepper */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start relative">
+      {/* Sticky Viewport Container - Pins the section while user scrolls through 280vh */}
+      <div className="sticky top-16 sm:top-20 z-10 py-6 sm:py-10 px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+        <div className="max-w-7xl mx-auto w-full relative z-10">
           
-          {/* Left Intact Sticky Card (Stays fixed in place) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 z-20 self-start">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="rounded-3xl p-6 sm:p-7 bg-[#121212]/95 backdrop-blur-2xl border border-emerald-500/40 shadow-2xl shadow-emerald-950/40 space-y-5 relative overflow-hidden group hover:border-emerald-400 transition-all duration-300"
-            >
+          {/* Split Layout: Left Intact Card + Right Scroll-Synchronized React Bits Stepper */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center relative">
+            
+            {/* Left Intact Main Card */}
+            <div className="lg:col-span-5 z-20">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="rounded-3xl p-6 sm:p-7 bg-[#121212]/95 backdrop-blur-2xl border border-emerald-500/40 shadow-2xl shadow-emerald-950/40 space-y-5 relative overflow-hidden group hover:border-emerald-400 transition-all duration-300"
+              >
               {/* Card ambient top glow */}
               <div className="absolute -top-24 -left-24 w-56 h-56 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/25 transition-all duration-500" />
 
@@ -123,6 +144,7 @@ export default function FeatureShowcase() {
           <div className="lg:col-span-7">
             <Stepper
               initialStep={1}
+              activeStep={activeStep}
               backButtonText="Previous Capability"
               nextButtonText="Next Capability"
             >
@@ -290,6 +312,7 @@ export default function FeatureShowcase() {
         </div>
 
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }

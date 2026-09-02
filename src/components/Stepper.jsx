@@ -6,6 +6,7 @@ import './Stepper.css';
 export default function Stepper({
   children,
   initialStep = 1,
+  activeStep: controlledActiveStep,
   onStepChange = () => {},
   onFinalStepCompleted = () => {},
   stepCircleContainerClassName = '',
@@ -26,6 +27,13 @@ export default function Stepper({
   const totalSteps = stepsArray.length;
   const isCompleted = currentStep > totalSteps;
   const isLastStep = currentStep === totalSteps;
+
+  React.useEffect(() => {
+    if (controlledActiveStep !== undefined && controlledActiveStep !== currentStep && controlledActiveStep >= 1 && controlledActiveStep <= totalSteps) {
+      setDirection(controlledActiveStep > currentStep ? 1 : -1);
+      setCurrentStep(controlledActiveStep);
+    }
+  }, [controlledActiveStep, currentStep, totalSteps]);
 
   const updateStep = (newStep) => {
     setCurrentStep(newStep);
