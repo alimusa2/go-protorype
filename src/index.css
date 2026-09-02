@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-dark: #0a0a0a;
+    --green-accent: #1a7a4a;
+    --green-bright: #10b981;
+  }
+}
+
+/* Ambient Star/Dot background texture */
+.star-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Dynamic Animated Line Grid with Pulsing Light Waves */
+.hero-line-grid {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(circle at 50% 40%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+}
+
+.pulse-wave-h {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.8) 50%, transparent 100%);
+  animation: pulseScanH 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.pulse-wave-v {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent 0%, rgba(16, 185, 129, 0.8) 50%, transparent 100%);
+  animation: pulseScanV 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulseScanH {
+  0% { top: 10%; opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { top: 90%; opacity: 0; }
+}
+
+@keyframes pulseScanV {
+  0% { left: 15%; opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { left: 85%; opacity: 0; }
+}
+
+/* Soft Green Ambient Glow Blobs */
+.glow-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-top-left {
+  top: -100px;
+  left: -100px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(26, 122, 74, 0.05) 60%, transparent 80%);
+}
+
+.glow-center-right {
+  top: 35%;
+  right: -150px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(26, 122, 74, 0.03) 70%, transparent 80%);
+}
+
+.glow-bottom-left {
+  bottom: -100px;
+  left: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(10, 10, 10, 0) 70%);
+}
+
+/* Premium Card Hover Effects */
+.premium-card {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.premium-card:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.12), 0 20px 40px rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1a7a4a;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(22, 22, 22, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+/* Timeline & Step Progress Indicator (Reference Image 3 style) */
+.timeline-track {
+  position: relative;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 1.25rem;
+  width: 2px;
+  background: linear-gradient(180deg, #10b981 0%, rgba(16, 185, 129, 0.2) 100%);
+  pointer-events: none;
+}
+
+.glowing-node {
+  box-shadow: 0 0 12px #10b981;
+}
+
+/* Horizontal Scroll Container without visible scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
